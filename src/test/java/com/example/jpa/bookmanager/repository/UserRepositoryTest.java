@@ -17,12 +17,9 @@ class UserRepositoryTest {
 
     @Test
     void crud() {   //C: CREATE R: READ U: UPDATE D: DELETE
+        long count = userRepository.count();
 
-        User user = userRepository.findById(1L).orElse(null);
-
-        System.out.println(user);
-
-
+        System.out.println(count);
     }
 
 }
