@@ -1,15 +1,11 @@
 package com.example.jpa.bookmanager.repository;
 
 import com.example.jpa.bookmanager.domain.User;
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
 
 @SpringBootTest
 class UserRepositoryTest {
@@ -60,7 +56,8 @@ class UserRepositoryTest {
         System.out.println("findLast1ByName : " + userRepository.findLast1ByName("park"));  //- 이키워드는 무시되어서 findByName 쿼리가 실행이 된다
         System.out.println("findTop1ByNameOrderByIdDesc : " + userRepository.findTop1ByNameOrderByIdDesc("park"));  //- 위 키워드에게 원했던 기능
         System.out.println("findFirstByNameOrderByIdDescEmailAsc :  "+userRepository.findFirstByNameOrderByIdDescEmailAsc("park"));
-        System.out.println("findFirstByNameWithSortParams : "+userRepository.findFirstByName("park",Sort.by(Sort.Order.desc("id"))));
+        System.out.println("findFirstByNameWithSortParams : "+userRepository.findFirstByName("park",Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
+        System.out.println("findByNameWithPaging : "+userRepository.findByName("park", PageRequest.of(0,1,Sort.by(Sort.Order.desc("id")))).getContent()); //-page값은 0인덱스 값임을 알아 놔야함
     }
 
 
