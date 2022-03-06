@@ -60,5 +60,16 @@ class UserRepositoryTest {
         System.out.println("findByNameWithPaging : "+userRepository.findByName("park", PageRequest.of(0,1,Sort.by(Sort.Order.desc("id")))).getContent()); //-page값은 0인덱스 값임을 알아 놔야함
     }
 
+    @Test
+    void insertAndUpdateTest(){
+        User user=new User();
+        user.setName("martin");
+        user.setEmail("martin@gmai.com");
 
+        userRepository.save(user);  //insert
+
+        User user2= userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("marrrrrtin");
+        userRepository.save(user2); //update
+    }
 }

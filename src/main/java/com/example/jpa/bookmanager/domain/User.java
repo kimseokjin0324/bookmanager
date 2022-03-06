@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Builder
+@Table(indexes = {@Index(columnList = "name")},uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class User {
     @Id             //PK
     @GeneratedValue //순차적으로 값을 자동으로 추가시켜주기 위해서
@@ -19,7 +20,9 @@ public class User {
     @NonNull
     private String name;
     @NonNull
+    @Column
     private String email;
+    @Column(updatable = false)
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
