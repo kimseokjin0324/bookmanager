@@ -50,4 +50,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByNameEndingWith(String name);
 
     List<User> findByNameContains(String name);
+
+    List<User> findLast1ByName(String name);
+
+    List<User> findTop1ByNameOrderByIdDesc(String name);
+
 }

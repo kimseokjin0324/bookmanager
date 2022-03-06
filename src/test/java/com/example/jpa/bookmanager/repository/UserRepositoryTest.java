@@ -49,9 +49,16 @@ class UserRepositoryTest {
 //        System.out.println("findByIdIsNotNull : "+userRepository.findByIdIsNotNull());
 //        System.out.println("findByAddressIsNotEmpty : "+userRepository.findByAddressIsNotEmpty());
 //        System.out.println("findByNameIn : "+userRepository.findByNameIn(Lists.newArrayList("kim","lee")));
-        System.out.println("findByNameStartingWith : "+userRepository.findByNameStartingWith("pa"));
-        System.out.println("findByNameEndingWith : "+userRepository.findByNameEndingWith("rk"));
-        System.out.println("findByNameContains : "+userRepository.findByNameContains("ar"));
+//        System.out.println("findByNameStartingWith : "+userRepository.findByNameStartingWith("pa"));
+//        System.out.println("findByNameEndingWith : "+userRepository.findByNameEndingWith("rk"));
+//        System.out.println("findByNameContains : "+userRepository.findByNameContains("ar"));
+    }
+
+    @Test
+    void pagingAndSortingTest() {
+        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("park"));
+        System.out.println("findLast1ByName : " + userRepository.findLast1ByName("park"));  //- 이키워드는 무시되어서 findByName 쿼리가 실행이 된다
+        System.out.println("findTop1ByNameOrderByIdDesc : " + userRepository.findTop1ByNameOrderByIdDesc("park"));  //- 위 키워드에게 원했던 기능
     }
 
 
