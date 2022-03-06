@@ -18,8 +18,13 @@ class UserRepositoryTest {
     @Test
     void crud() {   //C: CREATE R: READ U: UPDATE D: DELETE
 
+        User user1 = new User("jack", "jack@gmail.com");
+        User user2 = new User("james", "james@gmail.com");
 
-        List<User> users = userRepository.findAllById(Lists.newArrayList(1L, 3L, 5L));
+        userRepository.saveAll(Lists.newArrayList(user1, user2));
+
+        List<User> users=userRepository.findAll();
+
         users.forEach(System.out::println);
 
 
