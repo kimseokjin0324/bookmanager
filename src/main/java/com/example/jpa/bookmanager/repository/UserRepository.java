@@ -55,4 +55,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findTop1ByNameOrderByIdDesc(String name);
 
+    List<User> findFirstByNameOrderByIdDescEmailAsc(String name);       //-아이디는 내림차순, email은 오름차순
+
 }
