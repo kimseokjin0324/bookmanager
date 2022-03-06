@@ -3,6 +3,7 @@ package com.example.jpa.bookmanager.repository;
 import com.example.jpa.bookmanager.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -27,5 +28,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findTop1ByName(String name);
 
     List<User> findByEmailAndName(String email, String name);
+
+    List<User> findByEmailOrName(String email, String name);
+
+    List<User> findByCreatedAtAfter(LocalDateTime yesterday);
 
 }

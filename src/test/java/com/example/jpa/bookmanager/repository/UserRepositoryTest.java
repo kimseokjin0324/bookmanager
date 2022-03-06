@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Sort;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,6 +42,8 @@ class UserRepositoryTest {
 
 
         System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("park@gmail.com", "park"));
+        System.out.println("findByEmailOrName : " + userRepository.findByEmailOrName("park@gmail.com", "park"));
+        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
     }
 
 
