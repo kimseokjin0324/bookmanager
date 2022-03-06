@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.Objects;
 
 @SpringBootTest
 class UserRepositoryTest {
@@ -17,8 +18,12 @@ class UserRepositoryTest {
 
     @Test
     void crud() {   //C: CREATE R: READ U: UPDATE D: DELETE
-        boolean exists = userRepository.existsById(1L);
-        System.out.println(exists);
+        userRepository.save(new User("david", "david@gmail.com"));
+
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setEmail("kimseokjin-updated@gmail.com");
+
+        userRepository.save(user);
     }
 
 }
