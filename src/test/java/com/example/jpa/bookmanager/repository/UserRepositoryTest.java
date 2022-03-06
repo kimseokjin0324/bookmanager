@@ -41,14 +41,17 @@ class UserRepositoryTest {
 //        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("lee"));
 
 
-        System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("park@gmail.com", "park"));
-        System.out.println("findByEmailOrName : " + userRepository.findByEmailOrName("park@gmail.com", "park"));
-        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
-        System.out.println("findByCreatedAtGreaterThan : " + userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
-        System.out.println("findByCreatedAtGreaterThanEqual : " + userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
-        System.out.println("findByIdIsNotNull : "+userRepository.findByIdIsNotNull());
-        System.out.println("findByAddressIsNotEmpty : "+userRepository.findByAddressIsNotEmpty());
-        System.out.println("findByNameIn : "+userRepository.findByNameIn(Lists.newArrayList("kim","lee")));
+//        System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("park@gmail.com", "park"));
+//        System.out.println("findByEmailOrName : " + userRepository.findByEmailOrName("park@gmail.com", "park"));
+//        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+//        System.out.println("findByCreatedAtGreaterThan : " + userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
+//        System.out.println("findByCreatedAtGreaterThanEqual : " + userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
+//        System.out.println("findByIdIsNotNull : "+userRepository.findByIdIsNotNull());
+//        System.out.println("findByAddressIsNotEmpty : "+userRepository.findByAddressIsNotEmpty());
+//        System.out.println("findByNameIn : "+userRepository.findByNameIn(Lists.newArrayList("kim","lee")));
+        System.out.println("findByNameStartingWith : "+userRepository.findByNameStartingWith("pa"));
+        System.out.println("findByNameEndingWith : "+userRepository.findByNameEndingWith("rk"));
+        System.out.println("findByNameContains : "+userRepository.findByNameContains("ar"));
     }
 
 
