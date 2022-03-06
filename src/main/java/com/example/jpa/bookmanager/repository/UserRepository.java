@@ -21,4 +21,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User streamByEmail(String email);
 
     User findUserByEmail(String email);
+
+    List<User> findFirst1ByName(String name);
+
+    List<User> findTop1ByName(String name);
+
+
 }

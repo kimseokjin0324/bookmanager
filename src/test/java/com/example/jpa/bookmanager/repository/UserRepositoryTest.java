@@ -36,6 +36,8 @@ class UserRepositoryTest {
         System.out.println("searchByEmail : "+userRepository.searchByEmail("lee@gmail.com") );
         System.out.println("streamByEmail : "+userRepository.streamByEmail("lee@gmail.com") );
         System.out.println("findUserByEmail : "+userRepository.findUserByEmail("lee@gmail.com") );
+        System.out.println("findFirst1ByName : "+userRepository.findFirst1ByName("lee") );
+        System.out.println("findTop1ByName : "+userRepository.findTop1ByName("lee") );
     }
 
 
