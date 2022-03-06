@@ -26,6 +26,8 @@ public class User {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @Transient
+    private String testData;
 //    @OneToMany(fetch = FetchType.EAGER)
 //    private List<Address> address;
 
