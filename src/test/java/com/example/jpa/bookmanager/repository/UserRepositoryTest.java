@@ -29,15 +29,18 @@ class UserRepositoryTest {
     @Test
     void select() {
         System.out.println(userRepository.findByName("kim"));
-        System.out.println("findByEmail : "+userRepository.findByEmail("lee@gmail.com"));
-        System.out.println("getByEmail : "+userRepository.getByEmail("lee@gmail.com") );
-        System.out.println("readByEmail : "+userRepository.readByEmail("lee@gmail.com") );
-        System.out.println("queryByEmail : "+userRepository.queryByEmail("lee@gmail.com") );
-        System.out.println("searchByEmail : "+userRepository.searchByEmail("lee@gmail.com") );
-        System.out.println("streamByEmail : "+userRepository.streamByEmail("lee@gmail.com") );
-        System.out.println("findUserByEmail : "+userRepository.findUserByEmail("lee@gmail.com") );
-        System.out.println("findFirst1ByName : "+userRepository.findFirst1ByName("lee") );
-        System.out.println("findTop1ByName : "+userRepository.findTop1ByName("lee") );
+//        System.out.println("findByEmail : " + userRepository.findByEmail("lee@gmail.com"));
+//        System.out.println("getByEmail : " + userRepository.getByEmail("lee@gmail.com"));
+//        System.out.println("readByEmail : " + userRepository.readByEmail("lee@gmail.com"));
+//        System.out.println("queryByEmail : " + userRepository.queryByEmail("lee@gmail.com"));
+//        System.out.println("searchByEmail : " + userRepository.searchByEmail("lee@gmail.com"));
+//        System.out.println("streamByEmail : " + userRepository.streamByEmail("lee@gmail.com"));
+//        System.out.println("findUserByEmail : " + userRepository.findUserByEmail("lee@gmail.com"));
+//        System.out.println("findFirst1ByName : " + userRepository.findFirst1ByName("lee"));
+//        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("lee"));
+
+
+        System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("park@gmail.com", "park"));
     }
 
 
