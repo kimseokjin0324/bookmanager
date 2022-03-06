@@ -44,6 +44,7 @@ class UserRepositoryTest {
         System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("park@gmail.com", "park"));
         System.out.println("findByEmailOrName : " + userRepository.findByEmailOrName("park@gmail.com", "park"));
         System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByIdAfter : " + userRepository.findByIdAfter(3L));
     }
 
 
