@@ -60,6 +60,7 @@ class UserRepositoryTest {
         System.out.println("findLast1ByName : " + userRepository.findLast1ByName("park"));  //- 이키워드는 무시되어서 findByName 쿼리가 실행이 된다
         System.out.println("findTop1ByNameOrderByIdDesc : " + userRepository.findTop1ByNameOrderByIdDesc("park"));  //- 위 키워드에게 원했던 기능
         System.out.println("findFirstByNameOrderByIdDescEmailAsc :  "+userRepository.findFirstByNameOrderByIdDescEmailAsc("park"));
+        System.out.println("findFirstByNameWithSortParams : "+userRepository.findFirstByName("park",Sort.by(Sort.Order.desc("id"))));
     }
 
 

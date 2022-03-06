@@ -1,6 +1,7 @@
 package com.example.jpa.bookmanager.repository;
 
 import com.example.jpa.bookmanager.domain.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -57,4 +58,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findFirstByNameOrderByIdDescEmailAsc(String name);       //-아이디는 내림차순, email은 오름차순
 
+    List<User> findFirstByName(String name, Sort sort);
 }
