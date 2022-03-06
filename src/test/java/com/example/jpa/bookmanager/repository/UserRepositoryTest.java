@@ -19,7 +19,7 @@ class UserRepositoryTest {
 
         userRepository.save(new User());
 
-        System.out.println(">>> : "+userRepository.findAll());
+        userRepository.findAll().forEach(System.out::println);
 
 
     }
