@@ -17,9 +17,8 @@ class UserRepositoryTest {
 
     @Test
     void crud() {   //C: CREATE R: READ U: UPDATE D: DELETE
-        long count = userRepository.count();
-
-        System.out.println(count);
+        boolean exists = userRepository.existsById(1L);
+        System.out.println(exists);
     }
 
 }
