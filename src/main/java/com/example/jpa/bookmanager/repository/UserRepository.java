@@ -40,4 +40,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByCreatedAtGreaterThanEqual(LocalDateTime yesterday);
 
     List<User> findByIdIsNotNull();
+
+    List<User> findByAddressIsNotEmpty();       // name is not null and name != ''??
+
+    List<User> findByNameIn(List<String> names);
 }

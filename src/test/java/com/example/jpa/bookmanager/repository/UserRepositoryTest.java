@@ -47,6 +47,8 @@ class UserRepositoryTest {
         System.out.println("findByCreatedAtGreaterThan : " + userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
         System.out.println("findByCreatedAtGreaterThanEqual : " + userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
         System.out.println("findByIdIsNotNull : "+userRepository.findByIdIsNotNull());
+        System.out.println("findByAddressIsNotEmpty : "+userRepository.findByAddressIsNotEmpty());
+        System.out.println("findByNameIn : "+userRepository.findByNameIn(Lists.newArrayList("kim","lee")));
     }
 
 
