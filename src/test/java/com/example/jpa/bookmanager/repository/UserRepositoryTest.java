@@ -1,5 +1,6 @@
 package com.example.jpa.bookmanager.repository;
 
+import com.example.jpa.bookmanager.domain.Gender;
 import com.example.jpa.bookmanager.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,21 +56,50 @@ class UserRepositoryTest {
         System.out.println("findTop1ByName : " + userRepository.findTop1ByName("park"));
         System.out.println("findLast1ByName : " + userRepository.findLast1ByName("park"));  //- 이키워드는 무시되어서 findByName 쿼리가 실행이 된다
         System.out.println("findTop1ByNameOrderByIdDesc : " + userRepository.findTop1ByNameOrderByIdDesc("park"));  //- 위 키워드에게 원했던 기능
-        System.out.println("findFirstByNameOrderByIdDescEmailAsc :  "+userRepository.findFirstByNameOrderByIdDescEmailAsc("park"));
-        System.out.println("findFirstByNameWithSortParams : "+userRepository.findFirstByName("park",Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
-        System.out.println("findByNameWithPaging : "+userRepository.findByName("park", PageRequest.of(0,1,Sort.by(Sort.Order.desc("id")))).getContent()); //-page값은 0인덱스 값임을 알아 놔야함
+        System.out.println("findFirstByNameOrderByIdDescEmailAsc :  " + userRepository.findFirstByNameOrderByIdDescEmailAsc("park"));
+        System.out.println("findFirstByNameWithSortParams : " + userRepository.findFirstByName("park", Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
+        System.out.println("findByNameWithPaging : " + userRepository.findByName("park", PageRequest.of(0, 1, Sort.by(Sort.Order.desc("id")))).getContent()); //-page값은 0인덱스 값임을 알아 놔야함
     }
 
     @Test
-    void insertAndUpdateTest(){
-        User user=new User();
+    void insertAndUpdateTest() {
+        User user = new User();
         user.setName("martin");
         user.setEmail("martin@gmai.com");
 
         userRepository.save(user);  //insert
 
-        User user2= userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
         user2.setName("marrrrrtin");
         userRepository.save(user2); //update
+    }
+
+    @Test
+    void enumTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+
+        userRepository.findAll().forEach(System.out::println);
+
+        System.out.println(userRepository.findRowRecord().get("gender"));
+    }
+
+    @Test
+    void listenerTest(){
+        User user=new User();
+        user.setEmail("kim@gamil.com");
+        user.setName("kim");
+
+        userRepository.save(user);      //Insert 가 진행
+
+        User user2=userRepository.findById(1L).orElseThrow(RuntimeException::new);
+
+        user2.setName("kimmmmmm");
+        userRepository.save(user2);     //Update
+
+        userRepository.deleteById(4L);      //delete
+
     }
 }
