@@ -5,9 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByName(String name); //-일반적으로 findBy라는 네이밍규칙을 많이 사용함
@@ -63,4 +65,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findFirstByName(String name, Sort sort);
 
     Page<User> findByName(String name, Pageable pageable);  // Page 응답을 하는 응답값 ,Pageable는 요청값
+
+    @Query(value = "select * from user limit 1;", nativeQuery = true)
+    Map<String, Object> findRowRecord();
 }
