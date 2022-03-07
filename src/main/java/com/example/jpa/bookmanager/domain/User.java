@@ -28,12 +28,5 @@ public class User extends BaseEntity{
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
-//    @Column(updatable = false)
-//    @CreatedDate
-//    private LocalDateTime createdAt;
-//    @LastModifiedDate
-//    private LocalDateTime updatedAt;
-
-    //    @OneToMany(fetch = FetchType.EAGER)
 
 }

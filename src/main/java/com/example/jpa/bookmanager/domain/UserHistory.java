@@ -1,6 +1,5 @@
 package com.example.jpa.bookmanager.domain;
 
-import com.example.jpa.bookmanager.domain.listener.Auditable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -26,9 +25,4 @@ public class UserHistory extends BaseEntity {
 
     private String email;
 
-//    @CreatedDate
-//    private LocalDateTime createdAt;
-//
-//    @LastModifiedDate
-//    private LocalDateTime updatedAt;
 }
