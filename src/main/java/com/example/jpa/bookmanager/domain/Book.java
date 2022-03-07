@@ -5,17 +5,14 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Book extends BaseEntity  {
+public class Book extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,5 +24,9 @@ public class Book extends BaseEntity  {
     private Long authorId;
 
     private Long publisherId;
+
+    @OneToOne(mappedBy = "book")
+    @ToString.Exclude
+    private BookReviewInfo bookReviewInfo;
 
 }
