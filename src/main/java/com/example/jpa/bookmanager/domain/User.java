@@ -18,7 +18,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity{
     @Id             //PK
-    @GeneratedValue //순차적으로 값을 자동으로 추가시켜주기 위해서
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
     private String name;
