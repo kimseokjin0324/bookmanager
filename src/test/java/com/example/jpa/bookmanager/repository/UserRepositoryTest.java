@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 class UserRepositoryTest {
 
     @Autowired
@@ -167,7 +168,7 @@ class UserRepositoryTest {
         List<UserHistory> result = userRepository.findByEmail("daniel@gmail.com").getUserHistories();
         result.forEach(System.out::println);
 
-        System.out.println("UserHistory.getUser() : "+userHistoryRepository.findAll().get(0).getUser());
+        System.out.println("UserHistory.getUser() : " + userHistoryRepository.findAll().get(0).getUser());
 
     }
 }
