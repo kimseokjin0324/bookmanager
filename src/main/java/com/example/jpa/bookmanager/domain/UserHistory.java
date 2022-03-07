@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class UserHistory extends BaseEntity implements Auditable {
+public class UserHistory extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;

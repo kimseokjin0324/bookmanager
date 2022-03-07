@@ -16,7 +16,7 @@ import javax.persistence.*;
 @EntityListeners(value = {UserEntityListener.class})
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class User extends BaseEntity implements Auditable{
+public class User extends BaseEntity{
     @Id             //PK
     @GeneratedValue //순차적으로 값을 자동으로 추가시켜주기 위해서
     private Long id;
