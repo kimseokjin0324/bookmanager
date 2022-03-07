@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Builder
-@EntityListeners(value = MyEntityListener.class)
+@EntityListeners(value = {MyEntityListener.class,UserEntityListener.class})
 public class User implements Auditable{
     @Id             //PK
     @GeneratedValue //순차적으로 값을 자동으로 추가시켜주기 위해서

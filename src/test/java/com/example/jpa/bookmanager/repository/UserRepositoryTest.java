@@ -15,6 +15,9 @@ class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserHistoryRepository userHistoryRepository;
+
 
     @Test
     void crud() {   //C: CREATE R: READ U: UPDATE D: DELETE
@@ -119,9 +122,23 @@ class UserRepositoryTest {
     @Test
     void preUpdateTest() {
         User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
-        System.out.println("as-is : "+user);
+        System.out.println("as-is : " + user);
         user.setName("lee sin");
         userRepository.save(user);
-        System.out.println("to-be :  "+userRepository.findAll().get(0));
+        System.out.println("to-be :  " + userRepository.findAll().get(0));
+    }
+
+    @Test
+    void userHistoryTest() {
+        User user = new User();
+        user.setName("kim-new");
+        user.setEmail("kim-new@gmail.com");
+
+        userRepository.save(user);
+
+        user.setName("kim-new-new");
+        userRepository.save(user);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
     }
 }
