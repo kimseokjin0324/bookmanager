@@ -158,7 +158,7 @@ class UserRepositoryTest {
         user.setEmail("daniel@gmail.com");
         userRepository.save(user);
 
-//        userHistoryRepository.findAll().forEach(System.out::println);
+        userHistoryRepository.findAll().forEach(System.out::println);
         //- userHistory가 엄청 쌓여있다면 findAll로 가져오면 X userId값을 특정하여 findById값으로 가져와야할 것이다.
 //        List<UserHistory> result = userHistoryRepository.findByUserId(
 //                userRepository.findByEmail("daniel@gmail.com").getId()
@@ -167,6 +167,7 @@ class UserRepositoryTest {
         List<UserHistory> result = userRepository.findByEmail("daniel@gmail.com").getUserHistories();
         result.forEach(System.out::println);
 
+        System.out.println("UserHistory.getUser() : "+userHistoryRepository.findAll().get(0).getUser());
 
     }
 }

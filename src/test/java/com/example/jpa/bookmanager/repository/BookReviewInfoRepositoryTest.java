@@ -49,7 +49,7 @@ class BookReviewInfoRepositoryTest {
         Book book = new Book();
         book.setName("JPA 연습");
         book.setAuthorId(1L);
-        book.setPublisherId(1L);
+//        book.setPublisherId(1L);
 
 
         return bookRepository.save(book);
