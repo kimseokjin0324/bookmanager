@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import java.time.LocalDateTime;
+
 @SpringBootTest
 class UserRepositoryTest {
 
@@ -87,19 +89,39 @@ class UserRepositoryTest {
     }
 
     @Test
-    void listenerTest(){
-        User user=new User();
+    void listenerTest() {
+        User user = new User();
         user.setEmail("kim@gamil.com");
         user.setName("kim");
 
         userRepository.save(user);      //Insert 가 진행
 
-        User user2=userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
 
         user2.setName("kimmmmmm");
         userRepository.save(user2);     //Update
 
         userRepository.deleteById(4L);      //delete
 
+    }
+
+    @Test
+    void prePersistTest() {
+        User user = new User();
+        user.setEmail("kimseokjin03@gamil.com");
+        user.setName("kimseok");
+
+        userRepository.save(user);
+
+        System.out.println(userRepository.findByEmail("kimseokjin03@gamil.com"));
+    }
+
+    @Test
+    void preUpdateTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        System.out.println("as-is : "+user);
+        user.setName("lee sin");
+        userRepository.save(user);
+        System.out.println("to-be :  "+userRepository.findAll().get(0));
     }
 }
