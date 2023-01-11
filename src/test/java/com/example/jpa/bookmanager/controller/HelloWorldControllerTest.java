@@ -21,9 +21,10 @@ class HelloWorldControllerTest {
 
     @Test
     void helloWorld() throws Exception {
+        //- get으로 요청하는것을 테스트 하겠다.
         mockMvc.perform(MockMvcRequestBuilders.get("/hello-world"))
                 .andDo(print())
-                .andExpect(status().isOk())
+                .andExpect(status().isOk()) //- 응답결과가 is OK인지?
                 .andExpect(content().string("Hello World"));
     }
 }
