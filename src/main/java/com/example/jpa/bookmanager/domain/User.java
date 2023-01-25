@@ -15,9 +15,11 @@ import java.util.List;
 @Data
 @Builder
 @Entity
-public class User {
+@EntityListeners(value=MyEntityListener.class)
+//@Table(name ="user",indexes={@Index(columnList = "name")},uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
+public class User implements Auditable{
 
-    @Id
+    @Id //-PK지정
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
@@ -25,11 +27,36 @@ public class User {
     @NonNull    //- 필수값이됨
     private String email;
 
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender;
+
+//    @Transient  //- 영속성처리에 제외 DB에는 제외
+//    private String testData;
 //    @OneToMany(fetch = FetchType.EAGER)
 //    private List<Address> address;
+//    @PrePersist
+//    @PreUpdate  //merge 메소드가 호출되기전 호출됨
+//    @PreRemove
+//    @PostPersist
+//    @PostUpdate // merge 메소드 호출후 호출
+//    @PostRemove
+//    @PostLoad   // -select 조회가 일어난 직후
+
+//    @PrePersist //실무에서 가장많이 쓰임
+//    public void prePersist(){
+//        this.createdAt=LocalDateTime.now();
+//        this.updatedAt=LocalDateTime.now();
+//    }
+//
+//
+//    @PreUpdate //실무에서 가장많이쓰임
+//    public void preUpdate(){
+//        this.updatedAt=LocalDateTime.now();
+//    }
 
 }
