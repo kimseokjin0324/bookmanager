@@ -1,5 +1,7 @@
 package com.example.jpa.bookmanager.domain;
 
+import com.example.jpa.bookmanager.domain.listener.Auditable;
+import com.example.jpa.bookmanager.domain.listener.UserEntityListener;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -7,7 +9,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 //@Getter
 //@Setter
@@ -15,12 +16,14 @@ import java.util.List;
 @NoArgsConstructor  //- 아무런 인자안주는 생성자 만들기(JPA에서는 인자없는 생서자 필요)
 @AllArgsConstructor //- 모든인자 생성자 만들기
 @RequiredArgsConstructor     //- 꼭필요한 인자만 생성자만들어줌
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @Entity
-@EntityListeners(value={AuditingEntityListener.class,UserEntityListener.class})
+@EntityListeners(value= UserEntityListener.class)
 //@Table(name ="user",indexes={@Index(columnList = "name")},uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
-public class User implements Auditable{
+public class User extends BaseEntity implements Auditable  {
 
     @Id //-PK지정
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +33,12 @@ public class User implements Auditable{
     @NonNull    //- 필수값이됨
     private String email;
 
-    @Column(updatable = false)
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
+//    @Column(updatable = false)
+//    @CreatedDate
+//    private LocalDateTime createdAt;
+//
+//    @LastModifiedDate
+//    private LocalDateTime updatedAt;
 
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
