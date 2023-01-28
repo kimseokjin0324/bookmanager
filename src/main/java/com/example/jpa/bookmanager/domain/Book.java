@@ -17,31 +17,17 @@ import java.time.LocalDateTime;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class Book extends BaseEntity implements Auditable {
+public class Book extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
 
     private String name;
 
-    private String author;
+    private String category;
 
-//    @CreatedDate
-//    private LocalDateTime createdAt;
-//
-//    @LastModifiedDate
-//    private LocalDateTime updatedAt;
-//
-//    @PrePersist
-//    public void prePersist(){
-//        this.createdAt =LocalDateTime.now();
-//        this.updatedAt =LocalDateTime.now();
-//    }
-//
-//    @PreUpdate
-//    public void preUpdate(){
-//        this.updatedAt =LocalDateTime.now();
-//    }
+    private Long authorId;
 
+    private Long publisherId;
 
 }

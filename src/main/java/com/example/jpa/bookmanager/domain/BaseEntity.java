@@ -1,5 +1,6 @@
 package com.example.jpa.bookmanager.domain;
 
+import com.example.jpa.bookmanager.domain.listener.Auditable;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @MappedSuperclass   //- 해당클래스의 필드를 상속받는 Entity컬럼에 추가한다.
 @EntityListeners(value = AuditingEntityListener.class)
-public class BaseEntity {
+public class BaseEntity implements Auditable {
 
     @CreatedDate
     private LocalDateTime createdAt;
