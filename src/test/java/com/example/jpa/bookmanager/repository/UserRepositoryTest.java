@@ -2,6 +2,7 @@ package com.example.jpa.bookmanager.repository;
 
 import com.example.jpa.bookmanager.domain.Gender;
 import com.example.jpa.bookmanager.domain.User;
+import com.example.jpa.bookmanager.domain.UserHistory;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
@@ -21,6 +22,7 @@ class UserRepositoryTest {
 
     @Autowired
     private UserHistoryRepository userHistoryRepository;
+
     @Test
     void crud() {
 
@@ -36,25 +38,7 @@ class UserRepositoryTest {
     @Test
     void select() {
 
-//        System.out.println(userRepository.findByName("denis"));
-
-//        System.out.println("findByEmail : " +userRepository.findByEmail("martin@aaa.aaa"));
-//        System.out.println("getByEmail : " +userRepository.getByEmail("martin@aaa.aaa"));
-//        System.out.println("readByEmail : " +userRepository.readByEmail("martin@aaa.aaa"));
-//        System.out.println("queryByEmail : " +userRepository.queryByEmail("martin@aaa.aaa"));
-//        System.out.println("searchByEmail : " +userRepository.searchByEmail("martin@aaa.aaa"));
-//        System.out.println("streamByEmail : " +userRepository.streamByEmail("martin@aaa.aaa"));
-//        System.out.println("findUserByEmail : " +userRepository.findUserByEmail("martin@aaa.aaa"));
-//        System.out.println("findByEmailAndName : "+userRepository.findByEmailAndName("martin@aaa.aaa","martin"));
-//        System.out.println("findByEmailOrName : "+userRepository.findByEmailOrName("martin@aaa.aaa","denis"));
-//        System.out.println("findByCreatedAtAfter : "+userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
-//        System.out.println("findByIdAfter : "+userRepository.findByIdAfter(1L));
-//        System.out.println("findByCreatedAtGreaterThan : "+userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
-//        System.out.println("findByCreatedAtGreaterThanEqual : "+userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
-//        System.out.println("findByCreatedAtBetween : "+userRepository.findByCreatedAtBetween(LocalDateTime.now().minusDays(1L) ,LocalDateTime.now().plusDays(1L)));
-//        System.out.println("findByIdBetween : "+userRepository.findByIdBetween(1L,3L));
         System.out.println("findByIdIsNotNull : " + userRepository.findByIdIsNotNull());  //- NULL인지 체크하는 쿼리
-//        System.out.println("findByAddressIsNotEmpty : "+userRepository.findByAddressIsNotEmpty());
         System.out.println("findByNameIn : " + userRepository.findByNameIn(Lists.newArrayList("martin", "dennis")));
         System.out.println("findByNameStartingWith : " + userRepository.findByNameStartingWith("mar"));
         System.out.println("findByNameEndingWith : " + userRepository.findByNameEndingWith("tin"));
@@ -107,12 +91,10 @@ class UserRepositoryTest {
     }
 
     @Test
-    void prePersistTest(){
-        User user =new User();
+    void prePersistTest() {
+        User user = new User();
         user.setEmail("martin22@bva.com");
         user.setName("martin");
-//        user.setCreatedAt(LocalDateTime.now());
-//        user.setUpdatedAt(LocalDateTime.now());
 
         userRepository.save(user);
 
@@ -120,19 +102,19 @@ class UserRepositoryTest {
     }
 
     @Test
-    void preUpdateTest(){
-        User user =userRepository.findById(1L).orElseThrow(RuntimeException::new);
+    void preUpdateTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
 
-        System.out.println("as -is:"+user);
+        System.out.println("as -is:" + user);
         user.setName("martin22");
         userRepository.save(user);
 
-        System.out.println("to-be: "+userRepository.findAll().get(0));
+        System.out.println("to-be: " + userRepository.findAll().get(0));
     }
 
     @Test
-    void userHistoryTest(){
-        User user =new User();
+    void userHistoryTest() {
+        User user = new User();
         user.setEmail("martinnew@aaa.aaa");
         user.setName("test1");
 
@@ -144,5 +126,34 @@ class UserRepositoryTest {
         userHistoryRepository.findAll().forEach(System.out::println);
 
 
+    }
+
+    @Test
+    void userRelationTest() {
+        User user = new User();
+        user.setName("david");
+        user.setEmail("david@test.com");
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+
+        user.setName("daniel");
+
+        userRepository.save(user);
+
+        user.setEmail("daniel@test2.com");
+
+        userRepository.save(user);
+
+//        userHistoryRepository.findAll().forEach(System.out::println);
+//        List<UserHistory> result = userHistoryRepository.findByUserId(
+//                userRepository.findByEmail("daniel@test2.com").getId()
+//        );
+        List<UserHistory> result =
+                userRepository
+                        .findByEmail("daniel@test2.com")
+                        .getUserHistories();    //- 위 코드와 동일 한 기능을 하는 데 @OneToMany를 이용함
+
+        result.forEach(System.out::println);
     }
 }
