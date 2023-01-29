@@ -145,7 +145,7 @@ class UserRepositoryTest {
 
         userRepository.save(user);
 
-//        userHistoryRepository.findAll().forEach(System.out::println);
+        userHistoryRepository.findAll().forEach(System.out::println);
 //        List<UserHistory> result = userHistoryRepository.findByUserId(
 //                userRepository.findByEmail("daniel@test2.com").getId()
 //        );
@@ -155,5 +155,7 @@ class UserRepositoryTest {
                         .getUserHistories();    //- 위 코드와 동일 한 기능을 하는 데 @OneToMany를 이용함
 
         result.forEach(System.out::println);
+
+        System.out.println("UserHistory.getUser() : "+ userHistoryRepository.findAll().get(0).getUser());
     }
 }

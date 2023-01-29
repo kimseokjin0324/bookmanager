@@ -31,6 +31,11 @@ public class User extends BaseEntity {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private List<UserHistory> userHistories = new ArrayList<>(); //null 값 방지용 new ArrayList로 세팅
+    @ToString.Exclude
+    private List<UserHistory> userHistories = new ArrayList<>();  //null 값 방지용 new ArrayList로 세팅
 
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    @ToString.Exclude
+    private List<Review> reviews = new ArrayList<>();
 }
