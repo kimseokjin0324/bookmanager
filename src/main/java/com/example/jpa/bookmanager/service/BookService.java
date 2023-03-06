@@ -6,6 +6,7 @@ import com.example.jpa.bookmanager.repository.AuthorRepository;
 import com.example.jpa.bookmanager.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -14,19 +15,35 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final AuthorService authorService;
 
-
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void putBookAndAuthor() {
         Book book = new Book();
         book.setName("JPA 시작하기");
 
         bookRepository.save(book);
+        try {
+            authorService.putAuthor();
+        } catch (RuntimeException e) {
 
-        Author author = new Author();
-        author.setName("martin");
+        }
+//        throw new RuntimeException("오류가 발생하였습니다 transaction은 어떻게 될까요? ");
+//        Author author = new Author();
+//        author.setName("martin");
+//
+//        authorRepository.save(author);
 
-        authorRepository.save(author);
+
+    }
+
+    @Transactional
+    public void get(Long id) {
+        System.out.println(">>> " + bookRepository.findById(id));
+        System.out.println(">>> " + bookRepository.findAll());
+
+        System.out.println(">>> " + bookRepository.findById(id));
+        System.out.println(">>> " + bookRepository.findAll());
 
     }
 }
