@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BookNameAndCategory {
     private String name;
-    private String categroy;
+    private String category;
 }
