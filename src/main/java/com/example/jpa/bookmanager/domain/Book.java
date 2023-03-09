@@ -1,5 +1,7 @@
 package com.example.jpa.bookmanager.domain;
 
+import com.example.jpa.bookmanager.domain.converter.BookStatusConverter;
+import com.example.jpa.bookmanager.repository.dto.BookStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Where(clause ="deleted =false")
+@Where(clause = "deleted =false")
 public class Book extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +51,12 @@ public class Book extends BaseEntity {
 
     private boolean deleted = false;
 
+    @Convert(converter = BookStatusConverter.class)
+    private BookStatus status; //판매상태
+
     public void addBookAndAuthors(BookAndAuthor... bookAndAuthor) {
         Collections.addAll(this.bookAndAuthors, bookAndAuthor);
     }
+
+
 }
