@@ -1,5 +1,6 @@
 package com.example.jpa.bookmanager.repository;
 
+import com.example.jpa.bookmanager.domain.Address;
 import com.example.jpa.bookmanager.domain.Gender;
 import com.example.jpa.bookmanager.domain.User;
 import com.example.jpa.bookmanager.domain.UserHistory;
@@ -10,12 +11,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
 @SpringBootTest //-SpringContext를 연결해서 테스트하겠다라는뜻
 class UserRepositoryTest {
+
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Autowired
     private UserRepository userRepository;
@@ -156,6 +162,37 @@ class UserRepositoryTest {
 
         result.forEach(System.out::println);
 
-        System.out.println("UserHistory.getUser() : "+ userHistoryRepository.findAll().get(0).getUser());
+        System.out.println("UserHistory.getUser() : " + userHistoryRepository.findAll().get(0).getUser());
+    }
+
+
+
+    @Test
+    void embedTest() {
+        userRepository.findAll().forEach(System.out::println);
+
+        User user = new User();
+        user.setName("steve");
+        user.setHomeAddress(new Address("서울시", "강남구", "강남대로 364 석진빌딩", "08123"));
+        user.setCompanyAddress(new Address("서울시", "종로구", "교보문고 12층", "1234"));
+        userRepository.save(user);
+
+        User user1 = new User();
+        user1.setName("Joshua");
+        user1.setHomeAddress(null);
+        user1.setCompanyAddress(null);
+        userRepository.save(user1);
+
+        User user2 = new User();
+        user2.setName("Jordan");
+        user2.setHomeAddress(new Address());
+        user2.setCompanyAddress(new Address());
+        userRepository.save(user2);
+
+        entityManager.clear();
+
+        userRepository.findAll().forEach(System.out::println);
+        userHistoryRepository.findAll().forEach(System.out::println);
+        userRepository.findAllRowRecord().forEach(a-> System.out.println(a.values()));
     }
 }
