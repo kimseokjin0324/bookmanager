@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -24,4 +25,7 @@ public class Comment extends BaseEntity {
     @ManyToOne
     @ToString.Exclude
     private Review review;
+
+    @Column(columnDefinition = "datetime")
+    private LocalDateTime commentedAt;
 }

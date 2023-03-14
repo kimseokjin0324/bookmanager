@@ -14,6 +14,8 @@ import org.springframework.data.domain.ExampleMatcher;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
 @SpringBootTest //-SpringContext를 연결해서 테스트하겠다라는뜻
@@ -194,5 +196,10 @@ class UserRepositoryTest {
         userRepository.findAll().forEach(System.out::println);
         userHistoryRepository.findAll().forEach(System.out::println);
         userRepository.findAllRowRecord().forEach(a-> System.out.println(a.values()));
+
+        assertAll(
+                ()->assertThat(userRepository.findById(7L).get().getHomeAddress()).isNull(),
+                ()->assertThat(userRepository.findById(8L).get().getHomeAddress()).isInstanceOf(Address.class)
+        );
     }
 }
